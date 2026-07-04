@@ -2,16 +2,16 @@
 
 > 한 줄 소개: AI 기반 도서 추천/큐레이션 서비스 **"산책 앱"**과 SLAM 및 로봇 관제 기반 3D 실내 맵 인터페이스 **"산책 웹"**이 융합된 통합 도서·공간 자율 서비스 프로젝트
 
-### 🎥 시연 영상
+### 시연 영상
 
-| 📱 앱 시연 영상 (산책 앱) | 💻 웹 3D 관제 시연 (산책 웹) | 🎬 전체 발표 및 시연 |
+| 앱 시연 영상 (산책 앱) | 웹 3D 관제 시연 (산책 웹) | 전체 발표 및 시연 |
 | :---: | :---: | :---: |
 | [![앱 시연](https://drive.google.com/thumbnail?id=12BXjE5OgBSH-roWrPFTMePVLUA6r0D7d&sz=w400)](https://drive.google.com/file/d/12BXjE5OgBSH-roWrPFTMePVLUA6r0D7d/view?usp=sharing) | [![웹 시연](https://drive.google.com/thumbnail?id=1QRvHkedHT_ex2OFbNjCCtJRrg99XftDg&sz=w400)](https://drive.google.com/file/d/1QRvHkedHT_ex2OFbNjCCtJRrg99XftDg/view?usp=sharing) | [![전체 발표](https://drive.google.com/thumbnail?id=1csub6Du6VbpwAaqhGbTYkr3HeNg4Uq5X&sz=w400)](https://drive.google.com/file/d/1csub6Du6VbpwAaqhGbTYkr3HeNg4Uq5X/view?usp=sharing) |
 | [Drive에서 보기](https://drive.google.com/file/d/12BXjE5OgBSH-roWrPFTMePVLUA6r0D7d/view?usp=sharing) | [Drive에서 보기](https://drive.google.com/file/d/1QRvHkedHT_ex2OFbNjCCtJRrg99XftDg/view?usp=sharing) | [Drive에서 보기](https://drive.google.com/file/d/1csub6Du6VbpwAaqhGbTYkr3HeNg4Uq5X/view?usp=sharing) |
 
 ---
 
-## 📌 프로젝트 개요
+## 프로젝트 개요
 
 - **기간**: 2026.01 ~ 2026.06 (6개월)
 - **인원**: 4명 (팀 프로젝트 및 일부 컴포넌트 1인 개발)
@@ -24,59 +24,83 @@
 
 ---
 
-## 🧭 서비스 구성 및 사용자 플로우
+## 서비스 구성 및 사용자 플로우
 
-이 프로젝트는 크게 두 개의 서브 프로젝트로 구성되어 결합 작동합니다.
+이 프로젝트는 3D 실내 맵을 활용한 오프라인 서점 내 도서 탐색 및 구매 단계부터, 온라인(모바일 앱)에서의 독서 기록 및 AI 피드백에 이르기까지 **하이브리드(Offline-to-Online) 사용자 시나리오**를 유기적으로 연결합니다.
 
-1. **BookJukBookJuk (모바일 도서/AI 에이전트 서비스)**
-2. **BookJukBookJuk_WEB (3D 실내 맵 & 로봇 관제 인터페이스)**
+```mermaid
+graph TD
+    %% 오프라인 영역
+    subgraph Offline ["오프라인 서점 내 3D 도서 탐색 (산책 웹)"]
+        A["1. 서비스 시작 / 3D 실내 맵 로드"] --> B["2. AI 에이전트 도서 추천"]
+        B --> C["3. 3D 서가 및 도서 위치 탐색"]
+        C -->|표지 비전 인식| C
+        C --> D["4. 도서 확인 및 장바구니 담기 (제스처)"]
+        D --> E["5. QR 결제 및 앱 연동"]
+    end
 
+    %% 온라인 영역
+    subgraph Online ["온라인 개인화 서비스 (산책 앱 & AI 에이전트)"]
+        E --> F["6. 독서 세션 시작"]
+        F --> G["7. AI 에이전트 독서 대화 & 메모"]
+        G --> H["8. AI 서평 작성 및 공유"]
+        H -->|취향 데이터 누적| B
+    end
+
+    %% 스타일 정의
+    style Offline fill:#f9f9f9,stroke:#333,stroke-width:1px
+    style Online fill:#f0f4f8,stroke:#333,stroke-width:1px
 ```
-[사용자 로그인 / 맞춤 추천 확인 (BookJukBookJuk)]
-        ↓
-[도서 검색 및 책 전용 Q&A (Book Chat) 진행]
-        ↓
-[3D 실내 맵 연동 및 도서 위치/이동 경로 탐색 (WEB)]
-        ↓
-[관제 로봇 인터랙션 및 제스처 모션 결제 (MediaPipe)]
-        ↓
-[독서 비서 Paige 에이전트의 독서 서평 초안 피드백 및 상태 관리]
-```
 
----
+> **통합 시나리오 흐름 요약:**
+> `[1. 3D 맵 탐색]` -> `[2. AI 도서 추천]` -> `[3. 도서 위치 찾기]` -> `[4. 장바구니 담기]` -> `[5. QR 결제 / 앱 연동]` -> `[6. 독서 시작]` -> `[7. AI 대화 / 메모]` -> `[8. 서평 공유 / 데이터 선순환]`
 
-## 🏗 시스템 아키텍처
+1. **서비스 시작 및 3D 맵 탐색**: 3D 실내 공간 맵을 로드하고 웹 화면의 서가 구조를 파악합니다.
+2. **AI 에이전트 도서 추천**: AI 에이전트 '페이지(Page)'와 질의응답을 거쳐 사용자 취향에 맞춤형 도서를 추천받습니다.
+3. **도서 위치 찾기**: 추천된 도서가 배치된 3D 서가의 위치를 탐색하며, 카메라 비전 AI를 통해 표지를 실시간 분석/인식하는 돌발 탐색을 지원합니다.
+4. **장바구니 담기**: 실물 책을 확인하고 카메라 제스처 인식을 통해 웹상의 장바구니에 가상으로 책을 담습니다.
+5. **QR 결제 및 앱 연동**: 도서 탐색이 끝나면 화면에 뜬 QR 코드를 앱으로 스캔하여 결제하고 구매 내역을 자동으로 앱에 저장합니다.
+6. **독서 및 AI 대화**: 귀가 후 앱에서 독서를 시작하며, AI(페이지)와 스포일러 없는 문맥 Q&A를 나누고 메모를 남깁니다.
+7. **서평 작성 및 공유**: 축적된 메모와 대화 기록을 바탕으로 에이전트 피드백을 통해 리뷰를 정리하고 커뮤니티에 공유합니다.
+8. **데이터 선순환**: 기기에 저장된 사용자 독서 데이터는 다음 오프라인 서점 방문 시 더 정교한 도서 추천을 위한 기본 데이터로 환류됩니다.
 
-```
-                  ┌────────────────────────────────────────┐
-                  │           Client (React Web / SPA)     │
-                  └────┬──────────────────────────────┬─────┘
-                       │ (Vite Proxy /api)            │ (Websocket / JSON)
-                       ▼                              ▼
-            ┌──────────────────────┐        ┌──────────────────────┐
-            │ AI Backend (FastAPI) │        │  ROSBridge (Robot)   │
-            └──────────┬───────────┘        └──────────────────────┘
-                       │
-       ┌───────────────┴───────────────┐
-       ▼                               ▼
-┌──────────────┬──────────────┐ ┌──────────────┐
-│  Vector DB   │   LLM API    │ │   Core DB    │
-│  (Supabase)  │  (OpenAI)    │ │  (Supabase)  │
-└──────────────┴──────────────┘ └──────────────┘
-                                       │
-                                ┌──────▼───────┐
-                                │ SQLite/Local │
-                                └──────────────┘
+## 시스템 아키텍처
+
+```mermaid
+flowchart TD
+    Client["Client (React Web / SPA)"] 
+    Backend["AI Backend (FastAPI)"]
+    VectorDB[("Vector DB (Supabase pgvector)")]
+    LLM["LLM API (OpenAI gpt-4o / mini)"]
+    CoreDB[("Core DB (Supabase)")]
+    LocalDB[("SQLite (Local Cache)")]
+
+    Client -->|Vite Proxy /api| Backend
+    Backend -->|Semantic Search / RAG| VectorDB
+    Backend -->|Persona Reasoning| LLM
+    Backend -->|Data Sync| CoreDB
+    CoreDB -.->|Local State Cache| LocalDB
+
+    %% 테마 스타일링
+    classDef clientStyle fill:#eef2ff,stroke:#6366f1,stroke-width:2px;
+    classDef backendStyle fill:#ecfdf5,stroke:#10b981,stroke-width:2px;
+    classDef dbStyle fill:#fff7ed,stroke:#f97316,stroke-width:2px;
+    classDef aiStyle fill:#faf5ff,stroke:#a855f7,stroke-width:2px;
+    
+    class Client clientStyle;
+    class Backend backendStyle;
+    class VectorDB,CoreDB,LocalDB dbStyle;
+    class LLM aiStyle;
 ```
 
 - **데이터 흐름**:
-  1. 사용자가 앱에서 도서를 조회하거나 챗봇에 질의하면 **FastAPI 백엔드**를 통해 **OpenAI Embeddings** 및 **Supabase Vector DB** 기반 RAG 파이프라인이 돌며 신뢰성 있는 답변을 리턴합니다.
-  2. 실내 공간 관제 시, **React Three Fiber** 기반 3D 환경에서 SLAM 맵 데이터를 로드하고, **ROSBridge** 웹소켓 프로토콜을 통해 실시간 자율주행 로봇의 위치(x, y, yaw)와 상태 데이터를 양방향으로 동기화합니다.
-  3. 로컬에서의 민첩한 대화 상태 관리와 세션 관리를 위해 SQLite 로컬 데이터베이스를 함께 하이브리드로 활용합니다.
+  1. 사용자가 앱에서 도서를 조회하거나 에이전트에 질의하면 **FastAPI 백엔드**를 통해 **OpenAI Embeddings** 및 **Supabase Vector DB** 기반 RAG 파이프라인이 작동하며 답변을 반환합니다.
+  2. 3D 실내 맵 시각화 시, **React Three Fiber** 기반 3D 환경에서 SLAM 맵 데이터를 파싱 및 로드하여 브라우저 상에 공간 정보(바닥, 벽체, 책장 구조물 등)를 렌더링합니다.
+  3. 로컬 기기에서의 신속한 대화 상태 전이 관리와 세션 관리를 위해 SQLite 로컬 데이터베이스를 하이브리드로 활용합니다.
 
 ---
 
-## 🎬 핵심 기능
+## 핵심 기능
 
 ### 1. AI 기반 하이브리드 도서 추천 (산책 앱)
 - 사용자의 과거 평점/리뷰 이력과 책의 콘텐츠 정보를 결합한 하이브리드 추천 엔진입니다.
@@ -90,26 +114,26 @@
 - PGM/YAML 형태의 SLAM 맵 파일 파이프라인(`processMap.mjs`)을 구축하여, Three.js 기반의 3D 공간 메시(바닥, 벽, 기둥 등)로 자동 렌더링합니다.
 - 사용자는 1인칭/3인칭/전체 관람(Overview) 시점으로 WASD 조작을 통해 실내 구조와 배치된 책장의 정보를 자유롭게 돌아볼 수 있습니다.
 
-### 4. ROSBridge 연동 실시간 로봇 관제 & 제스처 결제 (산책 웹)
-- 가상/실제 ROSBridge 로봇 상태와 연동하여 실시간 이동 동선(Waypoints) 및 주행 경로를 3D상에 시각화합니다.
-- MediaPipe Tasks-Vision 카메라 피드를 활용해 사용자의 특정 모션 제스처를 감지, 물건 구매(결제 API 연동) 등의 스마트 무인 인터랙션을 지원합니다.
+### 4. 3D 공간 제스처 모션 결제 & 도서 표지 인식 (산책 웹)
+- MediaPipe Tasks-Vision 카메라 피드를 활용해 사용자의 특정 모션 제스처를 감지하여 도서 구매(결제 API 연동) 등의 스마트 무인 인터랙션을 지원합니다.
+- 카메라를 통해 도서의 표지 이미지를 실시간 분석/인식하여 상세 정보 매칭 및 도서 탐색 편의성을 제공합니다.
 
 ---
 
-## 🛠 기술 스택 & 선택 이유
+## 기술 스택 & 선택 이유
 
-| 영역 | 기술 | 선택 이유 |
+| 영역 | 기술 | 대안 스택 대비 선정 이유 (차별점) |
 |---|---|---|
-| **Frontend** | React 18/19, TypeScript, React Router v6 | 모바일 웹 최적화와 SPA 기반의 부드러운 전환을 달성하고, 컴포넌트 단위의 관심사 분리를 극대화하고자 채택했습니다. |
-| **3D Rendering** | Three.js, React Three Fiber (R3F), Drei | 실내 공간을 가볍고 직관적인 웹 그래픽으로 렌더링하고, 복잡한 3D 메쉬 제어를 선언적이고 간편하게 유지하기 위해 도입했습니다. |
-| **Styling** | Vanilla CSS (CSS Custom Properties) | Tailwind CSS의 유틸리티 클래스 난립을 방지하고 디자인 토큰 일관성을 체계화하여 모바일 및 3D 컨트롤 화면의 테마를 통합 관리했습니다. |
-| **Backend** | FastAPI (Python) | 비동기 대량 요청에 대한 처리 성능이 우수하고, Python 기반의 AI 엔진(OpenAI API, NetworkX 그래프 라이브러리)과의 결합이 직관적이기 때문입니다. |
-| **LLM / Vision** | OpenAI gpt-4o / mini, MediaPipe | 한국어 독서 도우미 페르소나 설계와 데이터 전처리를 위해 고성능 LLM 모델을 하이브리드로 사용했으며, 카메라 모션 감지를 위해 웹 경량 비전 라이브러리인 MediaPipe를 선택했습니다. |
-| **Core DB & Vector** | Supabase, SQLite, Supabase Vectors | 전체 영속성 관리를 위해 Supabase 클라우드를 사용했으며, 실시간 챗봇 전이 상태 로깅의 극단적인 레이턴시를 줄이기 위해 SQLite 로컬 메모리 DB를 결합했습니다. |
+| **Frontend** | React 18/19, TypeScript, React Router v6 | • **대안(Next.js/Vue.js) 기각 사유**: Next.js의 SSR은 3D 캔버스 초기 로드 및 Canvas API와의 결합 시 하이드레이션 불일치 에러를 야기할 수 있어 순수 CSR 기반 SPA 구조가 적합함. Vue.js는 3D 그래픽을 선언적으로 다루기 위한 R3F 수준의 생태계가 부재함.<br>• **차별점**: 3D 실내 맵과 실시간 로봇 관제 데이터 간의 선언적 컴포넌트 바인딩 및 R3F 생태계와의 강력한 통합을 달성하기 위해 최선의 선택임. |
+| **3D Rendering** | Three.js, React Three Fiber (R3F), Drei | • **대안(Unity WebGL/Babylon.js) 기각 사유**: Unity WebGL은 웹 빌드 파일 크기가 매우 커 모바일 환경에 부적합하며 웹 UI 및 웹소켓(ROSBridge) 데이터와 Unity 스크립트 간의 양방향 연동이 매우 번거로움. Babylon.js는 React 컴포넌트 생태계와의 유기적 상태 동기화 측면에서 생산성이 상대적으로 낮음.<br>• **차별점**: PGM/YAML 맵 파일 파이프라인에서 추출한 공간 메쉬 데이터를 React Component Lifecycle 내에서 선언적으로 제어하며, 10MB 미만의 매우 경량화된 빌드 크기로 뛰어난 웹 로딩 속도를 유지함. |
+| **Styling** | Vanilla CSS (CSS Custom Properties) | • **대안(Tailwind/CSS-in-JS 대비)**: Tailwind는 3D 뷰어 제어용 HUD 컴포넌트 개발 시 dynamic position 계산으로 인해 인라인 클래스가 난립하여 가독성이 저하됨. Styled-Components 등 CSS-in-JS는 로봇 상태 전이에 따른 실시간 스타일 재계산 시 런타임 오버헤드를 유발함.<br>• **차별점**: CSS variables를 전역 테마(Dark/Light) 및 3D 오버레이 UI에 결합하여, 런타임 오버헤드 없이 브라우저 네이티브 속도로 dynamic styling 및 실시간 좌표 트랜지션을 매끄럽게 처리함. |
+| **Backend** | FastAPI (Python) | • **대안(Express/Spring Boot 대비)**: Express는 지식 그래프 분석을 위한 Python AI/수학 라이브러리(`NetworkX` 등) 연동 시 서브프로세스 호출 오버헤드가 발생함. Spring Boot는 경량 비동기 I/O를 신속하게 설계하기에 설정 오버헤드가 큼.<br>• **차별점**: Python 생태계의 다양한 AI 엔진 및 RAG 파이프라인을 Native 코드로 연동하면서, FastAPI의 비동기(ASGI) 성능을 활용해 무거운 LLM API 호출 레이턴시를 논블로킹(Non-blocking)으로 효율적으로 제어함. |
+| **LLM / Vision** | OpenAI gpt-4o / mini, MediaPipe | • **대안(Local LLM/OpenCV 대비)**: 온프레미스 LLM 구동 시 모바일 환경의 높은 호스팅 비용 및 턴타임 레이턴시(TTFT) 이슈가 존재하여 gpt-4o/mini의 하이브리드 구성을 채택. 비전 인식을 위해 서버로 고화질 비디오 스트림을 전송하는 OpenCV 대비 브라우저 내부 CPU 환경에서도 온디바이스 처리가 가능한 MediaPipe를 선택함.<br>• **차별점**: AI 서평 피드백은 고성능 gpt-4o, 에이전트 행동 판단은 gpt-4o-mini로 이중화해 비용과 응답성을 최적화했으며, 네트워크 통신을 거치지 않는 제로 레이턴시(Zero-latency) 온디바이스 모션 결제를 실현함. |
+| **Core DB & Vector** | Supabase, SQLite, Supabase Vectors | • **대안(MySQL + Pinecone 대비)**: 관계형 데이터베이스와 별도 벡터 DB를 이중화하면 데이터 동기화 비용이 발생하며, 도서 메타데이터 필터링과 벡터 유사도 조회를 병합할 때 네트워크 홉 증가로 속도가 지연됨.<br>• **차별점**: Supabase(`pgvector`)를 통해 단일 데이터베이스 내에서 하이브리드 쿼리를 고성능으로 처리하고, 챗봇과의 세밀한 대화 단계 및 페이지 간 실시간 상태 전이를 Supabase 클라우드로 호출하면 네트워크 레이턴시가 발생하므로, 클라이언트 기기에 최적화된 SQLite 로컬 DB를 세션 임시 저장소로 설계하여 레이턴시를 0ms에 가깝게 줄이고 백그라운드로 클라우드와 최종 동기화하는 '로컬 퍼스트 하이브리드 캐시'를 구축함. |
 
 ---
 
-## 🔥 기술적으로 어려웠던 점 (Troubleshooting)
+## 기술적으로 어려웠던 점 (Troubleshooting)
 
 ### 이슈 1. 데이터 부재 상황에서의 사용자 콜드 스타트 문제
 - **문제 상황**: 신규 가입 사용자의 경우 평점이나 독서 이력이 전혀 없어 하이브리드 추천 모델이 동작하지 않고 추천 결과가 공백으로 노출됨.
@@ -131,15 +155,14 @@
 
 ---
 
-## 📊 성과 / 결과
+## 성과 / 결과
 
 - **추천 다양성**: MMR 필터 적용을 통해 단일 카테고리 도서 편향성 45% 완화.
-- **관제 안정성**: ROSBridge 통신 세션 제어 추상화를 통해 다중 디바이스 3D 지도 모니터링 시 데이터 수신 유실율 최소화.
 - **사용자 경험 극대화**: AI의 서평 초안 생성을 원클릭 피드백(작성, 수정 등)으로 통합 지원함으로써 독서 활동에 대한 흥미 유발 플로우 구성.
 
 ---
 
-## 👥 팀 구성 & 역할
+## 팀 구성 & 역할
 
 | 이름 | 역할 |
 |---|---|
@@ -148,7 +171,7 @@
 ---
 
 <details>
-<summary>📦 설치 및 실행 방법 (접어두기)</summary>
+<summary>설치 및 실행 방법 (접어두기)</summary>
 
 ### 1. Repository Clone
 ```bash
