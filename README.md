@@ -155,52 +155,17 @@ flowchart TD
 
 ---
 
-## 성과 / 결과
+## 기대효과
 
-- **추천 다양성**: MMR 필터 적용을 통해 단일 카테고리 도서 편향성 45% 완화.
-- **사용자 경험 극대화**: AI의 서평 초안 생성을 원클릭 피드백(작성, 수정 등)으로 통합 지원함으로써 독서 활동에 대한 흥미 유발 플로우 구성.
+### 1. 수익성 개선 및 매출 증대 예측
 
----
+산책 팀은 타 산업에서 유사한 개인화 추천 시스템을 도입해 매출을 올린 성공 사례(네슬레 일본, ZARA 등)를 참조 집단으로 삼아 서점의 매출 상승률을 세 가지 시나리오로 예측했습니다.
 
-## 팀 구성 & 역할
-
-| 이름 | 역할 |
+| 시나리오 | 예측 매출 상승률 |
 |---|---|
-| **본인 (1인 개발 및 통합)** | **[앱]** UI/UX 디자인 구현, 독서 비서 Agent 고도화, 취향벡터 알고리즘 구현 <br> **[웹]** UI/UX 디자인 및 3D 실내 맵 구현, 제스처 및 도서 표지 인식 고도화, 관제 Agent 구현 |
+| **보수적 예측** | +3% ~ +4% |
+| **기본 (예상치)** | +7% |
+| **낙관적 예측** | +10% ~ +15% |
 
----
+> **분석 요약**: 단순히 진열된 책을 수동적으로 판매하는 구조에서 벗어나, 적극적이고 타겟팅된 추천이 오프라인에 적용될 때 정체된 대형 서점의 매출을 유의미하게 반등시킬 수 있음을 시사합니다.
 
-<details>
-<summary>설치 및 실행 방법 (접어두기)</summary>
-
-### 1. Repository Clone
-```bash
-git clone https://github.com/choichanwoo001/Sancheck.git
-cd Sancheck
-```
-
-### 2. BookJukBookJuk (도서/AI 서비스) 실행
-*   **Frontend**:
-    ```bash
-    cd BookJukBookJuk/frontend
-    npm install
-    npm run dev
-    ```
-*   **Backend AI**:
-    ```bash
-    cd BookJukBookJuk
-    pip install -r requirements.txt
-    
-    # 루트 .env.example을 참고하여 .env 파일 작성 및 API 키 세팅
-    cd backend
-    uvicorn main:app --reload --port 8000
-    ```
-
-### 3. BookJukBookJuk_WEB (3D 관제 웹) 실행
-```bash
-cd BookJukBookJuk_WEB
-npm install
-npm run dev
-```
-
-</details>
