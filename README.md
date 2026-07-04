@@ -2,7 +2,12 @@
 
 > 한 줄 소개: AI 기반 도서 추천/큐레이션 서비스 **"북적북적"**과 SLAM 및 로봇 관제 기반 3D 실내 맵 인터페이스 **"산책 Web"**이 융합된 통합 도서·공간 자율 서비스 프로젝트
 
-🎥 **[데모 영상 (유튜브 또는 드라이브 링크 삽입)]**
+### 🎥 시연 영상
+
+| 📱 앱 시연 영상 (북적북적) | 💻 웹 3D 관제 시연 (산책 Web) | 🎬 전체 발표 및 시연 |
+| :---: | :---: | :---: |
+| [![앱 시연](https://drive.google.com/thumbnail?id=12BXjE5OgBSH-roWrPFTMePVLUA6r0D7d&sz=w400)](https://drive.google.com/file/d/12BXjE5OgBSH-roWrPFTMePVLUA6r0D7d/view?usp=sharing) | [![웹 시연](https://drive.google.com/thumbnail?id=1QRvHkedHT_ex2OFbNjCCtJRrg99XftDg&sz=w400)](https://drive.google.com/file/d/1QRvHkedHT_ex2OFbNjCCtJRrg99XftDg/view?usp=sharing) | [![전체 발표](https://drive.google.com/thumbnail?id=1UhVjVvnPEiR66JjSgVfBxkzuBqEohLE4&sz=w400)](https://drive.google.com/file/d/1UhVjVvnPEiR66JjSgVfBxkzuBqEohLE4/view?usp=sharing) |
+| [Drive에서 보기](https://drive.google.com/file/d/12BXjE5OgBSH-roWrPFTMePVLUA6r0D7d/view?usp=sharing) | [Drive에서 보기](https://drive.google.com/file/d/1QRvHkedHT_ex2OFbNjCCtJRrg99XftDg/view?usp=sharing) | [Drive에서 보기](https://drive.google.com/file/d/1UhVjVvnPEiR66JjSgVfBxkzuBqEohLE4/view?usp=sharing) |
 
 ---
 
