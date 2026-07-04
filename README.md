@@ -1,10 +1,10 @@
 # Sancheck (산책)
 
-> 한 줄 소개: AI 기반 도서 추천/큐레이션 서비스 **"북적북적"**과 SLAM 및 로봇 관제 기반 3D 실내 맵 인터페이스 **"산책 Web"**이 융합된 통합 도서·공간 자율 서비스 프로젝트
+> 한 줄 소개: AI 기반 도서 추천/큐레이션 서비스 **"산책 앱"**과 SLAM 및 로봇 관제 기반 3D 실내 맵 인터페이스 **"산책 웹"**이 융합된 통합 도서·공간 자율 서비스 프로젝트
 
 ### 🎥 시연 영상
 
-| 📱 앱 시연 영상 (북적북적) | 💻 웹 3D 관제 시연 (산책 Web) | 🎬 전체 발표 및 시연 |
+| 📱 앱 시연 영상 (산책 앱) | 💻 웹 3D 관제 시연 (산책 웹) | 🎬 전체 발표 및 시연 |
 | :---: | :---: | :---: |
 | [![앱 시연](https://drive.google.com/thumbnail?id=12BXjE5OgBSH-roWrPFTMePVLUA6r0D7d&sz=w400)](https://drive.google.com/file/d/12BXjE5OgBSH-roWrPFTMePVLUA6r0D7d/view?usp=sharing) | [![웹 시연](https://drive.google.com/thumbnail?id=1QRvHkedHT_ex2OFbNjCCtJRrg99XftDg&sz=w400)](https://drive.google.com/file/d/1QRvHkedHT_ex2OFbNjCCtJRrg99XftDg/view?usp=sharing) | [![전체 발표](https://drive.google.com/thumbnail?id=1csub6Du6VbpwAaqhGbTYkr3HeNg4Uq5X&sz=w400)](https://drive.google.com/file/d/1csub6Du6VbpwAaqhGbTYkr3HeNg4Uq5X/view?usp=sharing) |
 | [Drive에서 보기](https://drive.google.com/file/d/12BXjE5OgBSH-roWrPFTMePVLUA6r0D7d/view?usp=sharing) | [Drive에서 보기](https://drive.google.com/file/d/1QRvHkedHT_ex2OFbNjCCtJRrg99XftDg/view?usp=sharing) | [Drive에서 보기](https://drive.google.com/file/d/1csub6Du6VbpwAaqhGbTYkr3HeNg4Uq5X/view?usp=sharing) |
@@ -16,8 +16,8 @@
 - **기간**: 2026.01 ~ 2026.06 (6개월)
 - **인원**: 4명 (팀 프로젝트 및 일부 컴포넌트 1인 개발)
 - **담당 역할**:
-  - **모바일 앱 (북적북적)**: UI/UX 디자인 구현, 독서 비서 Agent 고도화, 사용자 취향벡터 추천 알고리즘 구현
-  - **웹 (산책 Web)**: UI/UX 디자인 및 Three.js 기반 3D 실내 맵 구현, 미디어파이프 제스처 인식 결제 및 도서 표지 인식 고도화, 관제 Agent 구현
+  - **모바일 앱 (산책 앱)**: UI/UX 디자인 구현, 독서 비서 Agent 고도화, 사용자 취향벡터 추천 알고리즘 구현
+  - **웹 (산책 웹)**: UI/UX 디자인 및 Three.js 기반 3D 실내 맵 구현, 미디어파이프 제스처 인식 결제 및 도서 표지 인식 고도화, 관제 Agent 구현
 
 **이 프로젝트를 시작한 이유**
 - 기존의 도서 플랫폼은 획일화된 장르/인기 도서 추천에 그쳐 독자의 세분화된 취향을 반영하기 어려웠고, 독서 습관을 지속시키기에 동기부여가 부족했습니다. 또한 로보틱스 기술을 실생활에 접목해, 도서관/서점 같은 실내 공간에서 책의 위치를 쉽게 찾고 로봇과 제스처 인터랙션을 통한 원스톱 도서 발견/결제 경험을 선사하기 위해 이 프로젝트를 시작하게 되었습니다.
@@ -78,19 +78,19 @@
 
 ## 🎬 핵심 기능
 
-### 1. AI 기반 하이브리드 도서 추천 (BookJukBookJuk)
+### 1. AI 기반 하이브리드 도서 추천 (산책 앱)
 - 사용자의 과거 평점/리뷰 이력과 책의 콘텐츠 정보를 결합한 하이브리드 추천 엔진입니다.
 - 인메모리 `NetworkX` 기반의 지식 그래프(Knowledge Graph) 및 임베딩 벡터 모델을 결합하여 콜드 스타트 문제를 보완합니다.
 
-### 2. 독서 비서 Paige 에이전트 & Book Chat (BookJukBookJuk)
+### 2. 독서 비서 Paige 에이전트 & Book Chat (산책 앱)
 - 도서별 상세 페이지에서 RAG를 기반으로 도서 맥락 맞춤형 신뢰도 높은 Q&A를 지원합니다.
 - 마이페이지 내 Paige 에이전트가 실시간 독서 상태(`LIST` → `READING` → `RATED_ONLY` → `REVIEW_POSTED`)를 동기적으로 모니터링하고 넛지(Nudge) 및 서평 초안 작성을 보조합니다.
 
-### 3. SLAM 기반 실내 3D 맵 비주얼라이저 (BookJukBookJuk_WEB)
+### 3. SLAM 기반 실내 3D 맵 비주얼라이저 (산책 웹)
 - PGM/YAML 형태의 SLAM 맵 파일 파이프라인(`processMap.mjs`)을 구축하여, Three.js 기반의 3D 공간 메시(바닥, 벽, 기둥 등)로 자동 렌더링합니다.
 - 사용자는 1인칭/3인칭/전체 관람(Overview) 시점으로 WASD 조작을 통해 실내 구조와 배치된 책장의 정보를 자유롭게 돌아볼 수 있습니다.
 
-### 4. ROSBridge 연동 실시간 로봇 관제 & 제스처 결제 (BookJukBookJuk_WEB)
+### 4. ROSBridge 연동 실시간 로봇 관제 & 제스처 결제 (산책 웹)
 - 가상/실제 ROSBridge 로봇 상태와 연동하여 실시간 이동 동선(Waypoints) 및 주행 경로를 3D상에 시각화합니다.
 - MediaPipe Tasks-Vision 카메라 피드를 활용해 사용자의 특정 모션 제스처를 감지, 물건 구매(결제 API 연동) 등의 스마트 무인 인터랙션을 지원합니다.
 
