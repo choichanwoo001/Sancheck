@@ -1,0 +1,52 @@
+---
+description: Use shared typography and app color palette tokens in frontend
+globs: frontend/src/**/*.{css,jsx,tsx}
+alwaysApply: false
+---
+
+# Frontend Typography and Palette Tokens
+
+- Never hardcode common text sizes or palette colors in new UI code.
+- Use tokens from `frontend/src/styles/tokens.css` first.
+- Source palette:
+  - `#92C7CF`
+  - `#AAD7D9`
+  - `#FBF9F1`
+  - `#E5E1DA`
+- Preferred text colors:
+  - Primary text: `var(--color-text-primary)`
+  - Secondary text: `var(--color-text-secondary)`
+  - Gray body/caption text: `var(--color-text-muted)`
+  - Very subtle helper text: `var(--color-text-subtle)`
+- Preferred UI colors:
+  - Primary brand/accent: `var(--color-brand-primary)`
+  - Soft brand/accent: `var(--color-brand-soft)`
+  - Main background: `var(--color-bg-base)`
+  - Card/section surface: `var(--color-bg-surface)`
+  - Borders: `var(--color-border-soft)` or `var(--color-border-strong)`
+- Preferred sizes:
+  - Caption: `var(--font-size-xs)` or `var(--font-size-sm)`
+  - Body: `var(--font-size-base)` or `var(--font-size-lg)`
+  - Section title: `var(--font-size-xl)` / `var(--font-size-2xl)` / `var(--font-size-3xl)`
+- Prefer semantic utility classes when convenient: `.text-title`, `.text-body`, `.text-caption`, `.text-muted`.
+- If a new size or tone is truly needed, add a new token in `tokens.css` first, then use it.
+
+## Example
+
+```css
+.card-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.card-meta {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.card-surface {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-soft);
+}
+```

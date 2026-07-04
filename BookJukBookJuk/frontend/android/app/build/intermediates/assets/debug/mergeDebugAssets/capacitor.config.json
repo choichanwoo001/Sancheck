@@ -1,0 +1,12 @@
+{
+	"appId": "com.bookjukbookjuk.app",
+	"appName": "BookJukBookJuk",
+	"webDir": "dist",
+	"backgroundColor": "#FFFDF8",
+	"android": {
+		"backgroundColor": "#FFFDF8"
+	},
+	"server": {
+		"androidScheme": "https"
+	}
+}

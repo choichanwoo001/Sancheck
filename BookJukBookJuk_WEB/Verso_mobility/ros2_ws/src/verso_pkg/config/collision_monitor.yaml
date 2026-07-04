@@ -1,0 +1,53 @@
+# =============================================================================
+# collision_monitor.yaml — Scout Mini 전방 충돌 방지 (ESCORT 모드 전용)
+#
+# INPUT:  /cmd_vel_escort  (escort_controller 출력)
+# OUTPUT: /cmd_vel_safe    (cmd_vel_mux 입력 → 최종 /cmd_vel)
+#
+# NAV 모드에서는 cmd_vel_mux가 침묵하므로 충돌 없음.
+# Nav2는 자체 local_costmap으로 장애물을 처리함.
+#
+# Scout Mini 크기 기준 안전 구역 (base_footprint 기준):
+#   x+: 전방  x-: 후방  y+: 좌  y-: 우
+#
+#   [SlowDownZone] 전방 1.0m — 장애물 감지 시 50% 감속
+#   [StopZone]    전방 0.4m — 장애물 감지 시 즉시 정지
+# =============================================================================
+
+collision_monitor:
+  ros__parameters:
+    use_sim_time: false
+    base_frame_id:     "base_footprint"
+    odom_frame_id:     "odom"
+    cmd_vel_in_topic:  "/cmd_vel_escort"
+    cmd_vel_out_topic: "/cmd_vel_safe"
+    state_topic:       "/collision_monitor/state"
+    transform_tolerance: 0.3
+    source_timeout:      1.0
+    stop_pub_timeout:    2.0
+    polygons: ["SlowDownZone", "StopZone"]
+
+    # ── 감속 구역 ─────────────────────────────────────────────────────────────
+    SlowDownZone:
+      type: "polygon"
+      points: [1.00, 0.30, 1.00, -0.30, -0.35, -0.30, -0.35, 0.30]
+      action_type: "slowdown"
+      slowdown_ratio: 0.5
+      max_points: 3
+      visualize: true
+      polygon_pub_topic: "/collision_monitor/slow_down_zone"
+
+    # ── 정지 구역 ─────────────────────────────────────────────────────────────
+    StopZone:
+      type: "polygon"
+      points: [0.40, 0.25, 0.40, -0.25, -0.35, -0.25, -0.35, 0.25]
+      action_type: "stop"
+      max_points: 3
+      visualize: true
+      polygon_pub_topic: "/collision_monitor/stop_zone"
+
+    observation_sources: ["scan"]
+    scan:
+      type: "scan"
+      topic: "/scan"
+      enabled: true

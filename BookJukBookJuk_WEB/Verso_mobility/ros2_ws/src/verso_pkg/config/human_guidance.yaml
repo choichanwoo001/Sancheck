@@ -1,0 +1,93 @@
+# =============================================================================
+# human_guidance.yaml — verso_pkg Human Guidance (Escort)
+# =============================================================================
+
+person_tracker:
+  ros__parameters:
+
+    # ── Camera ───────────────────────────────────────────────────────────────
+    camera_topic_prefix: "/camera/camera_rear"
+    # align_depth 비활성화 → raw depth 사용 (enable_sync 제거로 프레임레이트 복구)
+    depth_topic: "/camera/camera_rear/depth/image_rect_raw"
+
+    # ── Detection ─────────────────────────────────────────────────────────────
+    yolo_model: "yolov8n.pt"          # n(빠름) / s / m(정확)
+    detection_confidence: 0.50
+
+    # ── Tracking / Re-ID (BotSort = ByteTrack + OSNet) ───────────────────────
+    reid_model: "osnet_x0_25_msmt17.pt"   # 첫 실행 시 boxmot이 자동 다운로드
+    device: "0"
+    use_half_precision: true              # OOM 시 false로 변경
+
+    # ── Target 선택 ───────────────────────────────────────────────────────────
+    auto_select_nearest: true     # 첫 감지 시 가장 가까운 사람 자동 락온
+    lost_reselect_frames: 150     # 150 프레임(≈5s @30fps) 뒤 재선택
+
+    # ── 속도 추정 ─────────────────────────────────────────────────────────────
+    velocity_history_size: 10     # 최소제곱 회귀에 쓸 위치 샘플 수
+
+    # ── Depth 필터 ────────────────────────────────────────────────────────────
+    min_person_depth: 0.3         # [m]
+    max_person_depth: 8.0         # [m]
+
+    # ── 시각화 ────────────────────────────────────────────────────────────────
+    viz_every_n_frames: 3
+
+
+escort_controller:
+  ros__parameters:
+
+    # ── 에스코트 거리 ──────────────────────────────────────────────────────────
+    target_distance: 1.0          # 로봇이 사람보다 앞서 있을 목표 거리 [m]
+
+    # ── 속도 제한 ─────────────────────────────────────────────────────────────
+    max_linear_vel:  0.5          # [m/s]
+    max_angular_vel: 0.6          # [rad/s]
+
+    # ── Linear PD 게인 ────────────────────────────────────────────────────────
+    kp_linear: 0.5
+    kd_linear: 0.1
+
+    # ── Angular P 게인 (odom frame 기반 heading error) ───────────────────────
+    kp_angular: 1.2        # lateral_angle(rad) → angular_z (rad/s)
+    kd_omega: 0.5          # 로봇 자체 회전 댐핑 (양성 피드백 억제)
+    heading_deadband: 0.08 # [rad] ≈ 4.5° 이하 측방 오차 무시 (직진 중 미세진동 억제)
+    arc_vel: 0.25          # [m/s] 측방 오차 시 호 운동용 최소 전진 속도
+
+    # ── 안전 ─────────────────────────────────────────────────────────────────
+    lost_timeout: 2.0             # [s] target 소실 후 정지까지 유예 시간
+
+    # ── 제어 주기 / 스무딩 ─────────────────────────────────────────────────────
+    cmd_rate: 20.0                # [Hz]
+    velocity_smoothing_alpha: 0.20  # 낮출수록 부드럽지만 반응 느림
+
+
+guided_escort:
+  ros__parameters:
+
+    # ── 거리 유지 ─────────────────────────────────────────────────────────────
+    target_distance: 1.0          # [m] escort_controller와 동일 값 권장
+
+    # ── 속도 제한 ─────────────────────────────────────────────────────────────
+    max_linear_vel:  0.5          # [m/s] Nav2 max_vel_x와 일치시킬 것
+
+    # ── Linear PD 게인 (escort_controller와 동일) ─────────────────────────────
+    kp_linear: 0.5
+    kd_linear: 0.1
+
+    # ── 안전 ─────────────────────────────────────────────────────────────────
+    lost_timeout: 2.0             # [s] 추적 소실 후 정지까지 유예 시간
+
+    # ── 제어 주기 / 스무딩 ─────────────────────────────────────────────────────
+    cmd_rate: 20.0                # [Hz]
+    velocity_smoothing_alpha: 0.20
+
+
+mission_manager:
+  ros__parameters:
+
+    # ── 이탈 감지 ─────────────────────────────────────────────────────────────
+    deviation_threshold: 2.0      # [m] 경로에서 이 거리 이상 벗어나면 REPLAN
+    replan_cooldown: 5.0          # [s] 연속 재경로 방지 쿨다운
+
+

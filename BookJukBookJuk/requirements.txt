@@ -1,0 +1,30 @@
+# BookJukBookJuk — 통합 Python 의존성 (저장소 루트에서: pip install -r requirements.txt)
+
+# Backend API
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+
+# 공통
+httpx>=0.27.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+
+# Supabase 시드·동기화 스크립트
+supabase>=2.10.0
+
+# AI (library_api, book_chat, hybrid_recommender)
+openai>=1.0.0
+numpy>=1.26.0
+scikit-learn>=1.4.0
+matplotlib>=3.8.0
+networkx>=3.3
+torch>=2.3.0
+langchain>=0.2.0
+langchain-openai>=0.1.0
+
+# 선택: Pinecone 미설치 시 코드 경로에서 폴백 (KG는 NetworkX + Supabase 메타)
+pinecone-client>=3.2.0
+
+# 기타 (기존 루트 requirements)
+mediapipe>=0.10.0
+opencv-python>=4.8.0

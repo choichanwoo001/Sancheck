@@ -1,0 +1,22 @@
+# ROS2 빌드 산출물
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+# 외부 패키지 (repos로 관리)
+ros2_ws/src/scout_ros2/
+ros2_ws/src/ugv_sdk/
+ros2_ws/src/sllidar_ros2/
+ros2_ws/src/realsense-ros/
+ros2_ws/src/image_pipeline/
+
+# 맵 바이너리
+maps/*.pgm
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 기타
+.DS_Store

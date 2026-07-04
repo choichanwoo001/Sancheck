@@ -1,0 +1,11 @@
+{
+  "name": "bookjukbookjuk",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "preview": "npm run preview --prefix frontend",
+    "api": "cd backend && python -m uvicorn main:app --reload --host 127.0.0.1 --port 8001",
+    "export-books": "npm run export-books --prefix frontend"
+  }
+}

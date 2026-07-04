@@ -1,0 +1,139 @@
+:root {
+  --color-brand-primary: #92C7CF;
+  --color-brand-secondary: #AAD7D9;
+  --color-surface-warm: #FBF9F1;
+  --color-surface-muted: #E5E1DA;
+  --color-page: #FFFDF8;
+  --color-card: #FFFFFF;
+  --color-text-primary: #2E1E14;
+  --color-text-secondary: #5A3E28;
+  --color-text-muted: #9A8878;
+  --color-text-soft: #C4B8A4;
+  --color-accent: #A87848;
+  --color-accent-soft: #D4B896;
+  --color-accent-deep: #2A1A0E;
+  --color-accent-readable: #7A6048;
+  --color-accent-gradient-start: #E8D8BE;
+  --color-accent-gradient-end: #C8A878;
+  --color-accent-line: #DDD0BE;
+  --color-accent-chip: #F0E0C8;
+  --color-accent-muted: #F0E8D8;
+  --color-prompt: #F5F0E6;
+  --color-prompt-icon: #E8D8C0;
+  --color-nav: #FDFBF8;
+  --color-border: #E8DED0;
+  --color-border-strong: #D8C8A8;
+  --color-border-muted: #E0D0B8;
+  --color-border-nav: #EDE8E0;
+  --color-text-disabled: #C8BCA8;
+  --color-white-alpha-21: rgba(255, 255, 255, 0.21);
+  --color-white-alpha-25: rgba(255, 255, 255, 0.25);
+  --color-shadow-warm: rgba(176, 144, 96, 0.16);
+  --color-shadow-dark: rgba(0, 0, 0, 0.08);
+  --color-shadow-active: rgba(160, 120, 80, 0.22);
+  --color-shadow-faint: rgba(176, 144, 96, 0.08);
+  --color-shadow-button: rgba(160, 120, 80, 0.13);
+  --color-shadow-shell: rgba(46, 30, 20, 0.12);
+  --color-surface-cream: #F5F0E8;
+  --color-surface-card-soft: #FAF7F2;
+  --color-brand-warm: #A07850;
+  --color-brand-warm-light: #D4B896;
+  --color-brand-warm-deep: #8A6040;
+  --color-success-soft: #E8F4EC;
+  --color-success-text: #3A7850;
+  --color-danger-soft: #F5E7E7;
+  --color-purple-soft: #B8A8D0;
+  --color-purple-deep: #7A5E9A;
+  --color-pink-soft: #D8A8C0;
+  --color-pink-deep: #C8608A;
+  --color-blue-soft: #9EB8D6;
+  --color-blue-deep: #7898C0;
+  --color-complete-gradient-start: #EFE0C8;
+  --color-complete-gradient-end: #B89768;
+  --color-review-page: #FFFCF6;
+  --color-review-panel: #FFFDF8;
+  --color-review-control: #F8F0E4;
+  --color-review-memory: #FFF9EF;
+  --color-review-purple-bg: #F4F0FA;
+  --color-review-purple-border: #D6C8EA;
+  --color-review-purple-text: #7C63A6;
+  --color-review-green: #72A729;
+  --color-review-divider: #E9DDCB;
+  --color-review-count: #C7B395;
+  /* phone-home 위젯 */
+  --color-widget-phone-home-start: #F8F4EE;
+  --color-widget-phone-home-end: #EEE8DC;
+  --color-widget-phone-home-badge: #EDE8DF;
+  --color-widget-phone-home-chip: #E8E2D6;
+  --gradient-widget-phone-home: linear-gradient(180deg, var(--color-widget-phone-home-start) 0%, var(--color-widget-phone-home-end) 100%);
+
+  /* next-day 위젯 */
+  --color-widget-next-day-start: #FEF6E4;
+  --color-widget-next-day-end: #FDECD0;
+  --color-widget-next-day-badge: #FCECD4;
+  --color-widget-next-day-chip: #FAE6C8;
+  --gradient-widget-next-day: linear-gradient(180deg, var(--color-widget-next-day-start) 0%, var(--color-widget-next-day-end) 100%);
+  --color-widget-headline: #2D2D2D;
+  --color-widget-subtext: #8D8D8D;
+  --color-widget-status: #8D8D8D;
+
+  --font-family-base: 'Noto Sans KR', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-status: 0.9375rem;
+  --font-size-title: 1.25rem;
+  --font-size-display: 1.5rem;
+  --font-size-widget-headline: 1.625rem;
+  --font-size-widget-sub: 1rem;
+  --font-size-hero-icon: 2.25rem;
+  --font-size-heading: 1.125rem;
+  --font-size-base: 0.875rem;
+  --font-size-small: 0.8125rem;
+  --font-size-caption: 0.75rem;
+  --font-size-micro: 0.6875rem;
+  --font-size-nav: 0.625rem;
+  --line-height-tight: 1.2;
+  --line-height-base: 1.45;
+  --line-height-relaxed: 1.58;
+
+  --space-1: 0.25rem;
+  --space-2: 0.375rem;
+  --space-3: 0.5rem;
+  --space-4: 0.75rem;
+  --space-5: 0.875rem;
+  --space-6: 1rem;
+  --space-7: 1.125rem;
+  --space-8: 1.25rem;
+  --space-9: 1.5rem;
+
+  --radius-sm: 0.625rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.125rem;
+  --radius-hero: 1.25rem;
+  --radius-widget: 2.5rem;
+  --radius-pill: 999px;
+  --shadow-soft: 0 0.25rem 1.25rem var(--color-shadow-warm);
+  --shadow-card: 0 0.125rem 0.75rem rgba(176, 144, 96, 0.09);
+  --shadow-control: 0 0.125rem 0.4375rem rgba(160, 120, 80, 0.13);
+  --shadow-float: 0 0.25rem 0.625rem rgba(176, 144, 96, 0.19);
+}
+
+.text-title {
+  font-size: var(--font-size-title);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+}
+
+.text-body {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+.text-caption {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-tight);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Calendar">
+<g clip-path="url(#clip0_0_29)">
+<path id="Vector" d="M3.66667 0.916667V2.75" stroke="var(--stroke-0, #3A2A1E)" stroke-width="0.916667" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M7.33333 0.916667V2.75" stroke="var(--stroke-0, #3A2A1E)" stroke-width="0.916667" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M8.70833 1.83333H2.29167C1.78541 1.83333 1.375 2.24374 1.375 2.75V9.16667C1.375 9.67293 1.78541 10.0833 2.29167 10.0833H8.70833C9.21459 10.0833 9.625 9.67293 9.625 9.16667V2.75C9.625 2.24374 9.21459 1.83333 8.70833 1.83333Z" stroke="var(--stroke-0, #3A2A1E)" stroke-width="0.916667" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M1.375 4.58333H9.625" stroke="var(--stroke-0, #3A2A1E)" stroke-width="0.916667" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_29">
+<path d="M0 0H11V11H0V0Z" fill="white"/>
+</clipPath>
+</defs>
+</svg>

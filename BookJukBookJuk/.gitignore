@@ -1,0 +1,20 @@
+# 로컬 비밀 (저장소에 올리지 않음)
+.env
+
+# Claude Code 로컬 권한(경로·머신별) — 공유 불필요
+.claude/settings.local.json
+
+# ORB 참조 표지 이미지 — 로컬에서만 `register.py`로 생성 (GitHub에는 폴더 구조만)
+book_recognition/refs/*
+!book_recognition/refs/.gitkeep
+
+# MediaPipe 손 모델 캐시 (gesture_test 실행 시 자동 다운로드)
+book_recognition/.models/
+.models/
+
+# Python / 가상환경
+__pycache__/
+*.py[cod]
+.venv*/
+venv/
+
