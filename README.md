@@ -29,6 +29,7 @@
 이 프로젝트는 3D 실내 맵을 활용한 오프라인 서점 내 도서 탐색 및 구매 단계부터, 온라인(모바일 앱)에서의 독서 기록 및 AI 피드백에 이르기까지 **하이브리드(Offline-to-Online) 사용자 시나리오**를 유기적으로 연결합니다.
 
 ```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#4a6fa5', 'lineColor': '#60a5fa', 'secondaryColor': '#0f172a', 'tertiaryColor': '#0f172a', 'clusterBkg': '#0f172a', 'clusterBorder': '#334155', 'edgeLabelBackground': '#1e293b'}}}%%
 graph TD
     %% 오프라인 영역
     subgraph Offline ["오프라인 서점 내 3D 도서 탐색 (산책 웹)"]
@@ -48,8 +49,8 @@ graph TD
     end
 
     %% 스타일 정의
-    style Offline fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Online fill:#f0f4f8,stroke:#333,stroke-width:1px
+    style Offline fill:#0f172a,stroke:#334155,stroke-width:1px,color:#94a3b8
+    style Online fill:#0f172a,stroke:#334155,stroke-width:1px,color:#94a3b8
 ```
 
 
@@ -66,8 +67,9 @@ graph TD
 ## 시스템 아키텍처
 
 ```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1e293b', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#334155', 'lineColor': '#60a5fa', 'secondaryColor': '#0f172a', 'tertiaryColor': '#0f172a', 'edgeLabelBackground': '#1e293b'}}}%%
 flowchart TD
-    Client["Client (React Web / SPA)"] 
+    Client["Client (React Web / SPA)"]
     Backend["AI Backend (FastAPI)"]
     VectorDB[("Vector DB (Supabase pgvector)")]
     LLM["LLM API (OpenAI gpt-4o / mini)"]
@@ -80,12 +82,12 @@ flowchart TD
     Backend -->|Data Sync| CoreDB
     CoreDB -.->|Local State Cache| LocalDB
 
-    %% 테마 스타일링
-    classDef clientStyle fill:#eef2ff,stroke:#6366f1,stroke-width:2px;
-    classDef backendStyle fill:#ecfdf5,stroke:#10b981,stroke-width:2px;
-    classDef dbStyle fill:#fff7ed,stroke:#f97316,stroke-width:2px;
-    classDef aiStyle fill:#faf5ff,stroke:#a855f7,stroke-width:2px;
-    
+    %% 다크 네이비 테마 스타일링
+    classDef clientStyle fill:#1e293b,stroke:#60a5fa,stroke-width:2px,color:#e2e8f0;
+    classDef backendStyle fill:#1e293b,stroke:#34d399,stroke-width:2px,color:#e2e8f0;
+    classDef dbStyle fill:#1e293b,stroke:#fb923c,stroke-width:2px,color:#e2e8f0;
+    classDef aiStyle fill:#1e293b,stroke:#a78bfa,stroke-width:2px,color:#e2e8f0;
+
     class Client clientStyle;
     class Backend backendStyle;
     class VectorDB,CoreDB,LocalDB dbStyle;
